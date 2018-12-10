@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+	
+		<title>first vesion</title>
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		 <meta charset="utf-8">
+		 <style>
+body {
+    background-color: #dfffef;
+}</style>
+	</head>
+	<body>
+	
+	<img src = "img/logo.png" id = "logo-image" alt = "Shop logo changing to ebay logo" onclick="gif()" >
+	<div class="navbar-static-top navbar-inverse" id="home">
+		<div class="container">
+			<button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+				Menu
+			</button>
+			<button onclick="myFunction()">Login/Register</button>
+			<div class="collapse navbar-collapse navHeaderCollapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#">Home</a></li>
+					<li><a href="#about">About</a></li>
+					<li><a href="#contact">Contact</a></li>
+				</ul>
+			</div>
+		</div>
+		
+	</div>
+	
+	<div class="jumbotron">
+		<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+	<br/><br/><br/>
+			<p><a href="http://ebay.com" target="_blank" class="form-control">connect me to ebay.com</a></p>
+				</div>
+			
+			<br/>
+			<div class="col-md-12">
+			<p><a href="MySample.php"  target="_blank" class="form-control">navigate shop products</a></p>
+			</div>
+			</div>
+		</div>
+	</div>
+	
+	<canvas id = "canvas" width ="1500" height ="200"></canvas>
+	<div class="alt1 padding" id="about">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4">
+				<h2 class="text-center">about</h2>
+				<p class="text-justify">Online Fashion Shop include international brands to make shopping to everyone and everywhere, we offer our clients latest trends and styles    </p>
+				
+			</div>
+			<div class="col-md-4">
+				<h2 class="text-center">history</h2>
+				<p class="text-justify">fashion online shop was created by NCI students Lamyae ,ioana and rem in 2018. </p>
+				
+			</div>
+			<div class="col-md-4">
+				<h2 class="text-center">service</h2>
+				<p class="text-justify">we provide convenient experience for costumers to make shopping easy and  fun  . </p>
+				
+			</div>
+		
+		</div>
+	</div>	
+	</div>
+	</br></br>
+	<div class="container padding" id="contact">
+		<form role="form">
+			<div class="form-group">
+			<p class="card-text">Contact details: </p>
+				<label for="email">Email:www.ncirl.ie</label>
+				
+			</div>
+			<div class="form-group">
+				<label for="name">phone:1850 221 721</label>
+				
+			</div>
+			<div class="col-md-12">	
+<button type="button"  style= color:blue onclick="document.getElementById('demo').innerHTML = Date()"> check what time is it now !</button>
+</div>
+<p id="demo"></p>
+			
+			
+			
+			<a href="https://www.facebook.com/" class="card-link" target = "blank">Facebook</a>
+			<a href="https://www.twitter.com/" class="card-link" target = "blank">Twitter</a>
+			<a href ="https://www.google.com/gmail/" class = "card-link" target = "blank">Gmail</a>
+		</form>
+		
+	</div>
+	
+	<div class="alt2">
+		<div class="container">
+			<footer>
+			
+				
+				<a href="#home">Back to top</a>
+			</footer>
+		</div>
+	</div>
+	
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script>
+	function gif(){
+	document.getElementById("logo-image").src = "img/eBayGif.gif";
+	}
+	</script>
+<script>
+ var img = new Image();
+img.src = 'animation.jpg';
+var CanvasXSize = 950;
+var CanvasYSize = 200;
+var speed = 25; 
+var scale = 1.05;
+var y = -4.5; 
+
+// Main program
+var dx = 0.75;
+var imgW;
+var imgH;
+var x = 0;
+var clearX;
+var clearY;
+var ctx;
+
+img.onload = function() {
+    imgW = img.width*scale;
+    imgH = img.height*scale;
+    if (imgW > CanvasXSize) { 
+		x = CanvasXSize-imgW; 
+    } // image larger than canvas
+    if (imgW > CanvasXSize) { 
+		clearX = imgW; 
+	} // image larger than canvas
+    else { 
+		clearX = CanvasXSize; 
+	}
+    if (imgH > CanvasYSize) { 
+		clearY = imgH; 
+	} // image larger than canvas
+    else {
+		clearY = CanvasYSize; 
+	}
+    //Get Canvas Element
+    ctx = document.getElementById('canvas').getContext('2d');
+    //Set Refresh Rate
+    return setInterval(draw, speed);
+}
+
+function draw() {
+	//Clear Canvas
+    ctx.clearRect(0,0,clearX,clearY);
+    //If image is <= Canvas Size
+    if (imgW <= CanvasXSize) {
+        //reset, start from beginning
+        if (x > (CanvasXSize)) {
+			x = 0; 
+		}
+        //draw aditional image
+        if (x > (CanvasXSize-imgW)) {
+			ctx.drawImage(img,x-CanvasXSize+1,y,imgW,imgH); 
+		}
+    }
+    //If image is > Canvas Size
+    else {
+        //reset, start from beginning
+        if (x > (CanvasXSize)) { 
+			x = CanvasXSize-imgW; 
+		}
+        //draw aditional image
+        if (x > (CanvasXSize-imgW)) { 
+			ctx.drawImage(img,x-imgW+1,y,imgW,imgH);			
+	    }
+    }
+    //draw image
+    ctx.drawImage(img,x,y,imgW,imgH);
+    //amount to move
+    x += dx;
+}
+</script>
+	<script>
+function myFunction() {
+    location.replace("login.php")
+}
+</script>
+	<script>
+	$(function() {
+  $('a[href*=#]:not([href=#])').click(function() {
+    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+      if (target.length) {
+        $('html,body').animate({
+          scrollTop: target.offset().top
+        }, 1000);
+        return false;
+      }
+    }
+  });
+});
+	</script>
+	</body>
+</html>
